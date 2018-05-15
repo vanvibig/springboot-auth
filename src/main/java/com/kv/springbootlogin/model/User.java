@@ -43,6 +43,19 @@ public class User {
         this.roles = roles;
     }
 
+    public User(User user) {
+        this.id = user.getId();
+        this.email = user.getEmail();
+        this.password = user.getPassword();
+        this.name = user.getName();
+        this.last_name = user.getName();
+        this.active = user.getActive();
+        this.roles = user.getRoles();
+    }
+
+
+
+
     public int getId() {
         return id;
     }
