@@ -1,9 +1,13 @@
 package com.kv.springbootlogin.model;
 
+import com.sun.org.apache.xalan.internal.xsltc.dom.SAXImpl;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CustomUserDetail extends User implements UserDetails {
 
@@ -13,7 +17,10 @@ public class CustomUserDetail extends User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return getRoles()
+                .stream()
+                .map(role -> new SimpleGrantedAuthority("ROLE " + role.getRole()))
+                .collect(Collectors.toList());
     }
 
     @Override
